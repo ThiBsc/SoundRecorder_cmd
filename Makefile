@@ -1,10 +1,17 @@
-CCOPTS=-Wall
+CXX=g++
+CCOPTS=-Wall -DSFML_STATIC
+LIBS=-lsfml-audio-s -lsfml-system-s -lpthread -lopenal -lvorbis -lvorbisfile -lvorbisenc -logg -lFLAC
+ODIR=obj
+SDIR=src
 
 soundrecorder: recorder.o main.o
-	LD_LIBRARY_PATH=~/Library/SFML-2.3.2/lib g++ $(CCOPTS) -o soundrecorder main.o recorder.o -L ~/Library/SFML-2.3.2/lib -lsfml-audio -lsfml-system
+	$(CXX) $(CCOPTS) -o soundrecorder $(ODIR)/main.o $(ODIR)/recorder.o $(LIBS)
 
-recorder.o: recorder.cpp header/recorder.h
-	g++ $(CCOPTS) -c recorder.cpp header/recorder.h -I ~/Library/SFML-2.3.2/include
+recorder.o: $(SDIR)/recorder.cpp $(SDIR)/header/recorder.h
+	$(CXX) $(CCOPTS) -c $(SDIR)/recorder.cpp -o $(ODIR)/recorder.o
 
-main.o: main.cpp header/recorder.h
-	g++ $(CCOPTS) -c main.cpp header/recorder.h -I ~/Library/SFML-2.3.2/include
+main.o: $(SDIR)/main.cpp $(SDIR)/header/recorder.h
+	$(CXX) $(CCOPTS) -c $(SDIR)/main.cpp -o $(ODIR)/main.o
+
+clean:
+	rm $(ODIR)/*.o
