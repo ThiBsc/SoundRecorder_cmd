@@ -33,7 +33,7 @@ int main()
     cout << " " << buffer.getSampleRate()           << " samples / seconds" << endl;
     cout << " " << buffer.getChannelCount()         << " channels"          << endl;
     // Save it to a file (for example...)
-    buffer.saveToFile("/home/thibaut/my_record.wav");
+    buffer.saveToFile("/home/yourDirectory/my_record.wav");
 
     cout << "Good bye!\n" << endl;
     delete rec;
