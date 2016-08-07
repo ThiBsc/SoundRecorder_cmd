@@ -2,7 +2,8 @@
 A shell sound recorder
 
 == Requirement ==
-- SFML 2.3.2 or higher (STATIC library)
+- SFML 2.3.2 or higher (STATIC library)<br>
+http://www.sfml-dev.org/tutorials/2.3/compile-with-cmake-fr.php
 
 == How to compile ==<br/>
 1. make soundrecorder<br/>
