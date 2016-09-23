@@ -4,14 +4,16 @@ LIBS=-lsfml-audio-s -lsfml-system-s -lpthread -lopenal -lvorbis -lvorbisfile -lv
 ODIR=obj
 SDIR=src
 
-soundrecorder: recorder.o main.o
-	$(CXX) $(CCOPTS) -o soundrecorder $(ODIR)/main.o $(ODIR)/recorder.o $(LIBS)
+all: soundrecorder.exe
 
-recorder.o: $(SDIR)/recorder.cpp $(SDIR)/header/recorder.h
-	$(CXX) $(CCOPTS) -c $(SDIR)/recorder.cpp -o $(ODIR)/recorder.o
+soundrecorder.exe: obj/recorder.o obj/main.o
+	$(CXX) -o $@ obj/recorder.o obj/main.o $(LIBS) $(CCOPTS)
 
-main.o: $(SDIR)/main.cpp $(SDIR)/header/recorder.h
-	$(CXX) $(CCOPTS) -c $(SDIR)/main.cpp -o $(ODIR)/main.o
+obj/recorder.o: src/recorder.cpp #$(SDIR)/header/recorder.h
+	$(CXX) -o $@ -c src/recorder.cpp
+
+obj/main.o: src/main.cpp #$(SDIR)/header/recorder.h
+	$(CXX) -o $@ -c src/main.cpp
 
 clean:
-	rm $(ODIR)/*.o
+	rm $(ODIR)/*.o ./*.exe
