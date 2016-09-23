@@ -2,8 +2,7 @@
 
 Recorder::Recorder()
 {
-    bRec = false;
-    bRecEnd = false;
+    status = WAIT;
     corrector = 0;
 }
 
@@ -11,13 +10,17 @@ Recorder::~Recorder()
 {
     //dtor
 }
+int Recorder::getStatus()
+{
+    return status;
+}
 
 bool Recorder::onProcessSamples(const sf::Int16 *samples, std::size_t sampleCount)
 {
     if (*samples == 0){
-        if (bRec){
+        if (status == RECORD){
             if (corrector > 2){
-                bRecEnd = true;
+                status = END;
                 std::cout << "Saving..." << std::endl;
                 return false;
             }
@@ -26,9 +29,9 @@ bool Recorder::onProcessSamples(const sf::Int16 *samples, std::size_t sampleCoun
         }
     }
     else{
-        if (!bRec){
+        if (status == WAIT){
         	std::cout << "Recording..." << std::endl;
-            bRec = true;
+            status = RECORD;
         }
         if (corrector > 0)
             corrector = 0;
