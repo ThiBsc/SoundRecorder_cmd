@@ -9,11 +9,12 @@ class Recorder : public sf::SoundBufferRecorder
     public:
         Recorder();
         virtual ~Recorder();
-    	bool bRecEnd;
+        enum RECSTATUS { WAIT=0, RECORD, END };
+        int getStatus();
     protected:
     	virtual bool onProcessSamples(const sf::Int16 *samples, std::size_t sampleCount);
     private:
-    	bool bRec;
+    	int status;
     	int corrector;
 };
 
