@@ -10,7 +10,7 @@ Recorder::~Recorder()
 {
     //dtor
 }
-int Recorder::getStatus()
+Recorder::RECSTATUS Recorder::getStatus()
 {
     return status;
 }
