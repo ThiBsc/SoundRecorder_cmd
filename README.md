@@ -13,7 +13,7 @@ http://www.sfml-dev.org/tutorials/2.4/compile-with-cmake-fr.php
 - Record your voice from a micro
 
 == How to use ==<br/>
-1. `./soundrec -o music.[ogg|oga|wav]`<br/>
+1. `./soundrec -o music.[ogg|flac|wav]`<br/>
 2. Follow the instruction
 
 It's recommended to close the other programs for better result
