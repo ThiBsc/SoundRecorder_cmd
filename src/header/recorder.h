@@ -4,6 +4,8 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
+extern int max_blank;
+
 class Recorder : public sf::SoundBufferRecorder
 {
     public:

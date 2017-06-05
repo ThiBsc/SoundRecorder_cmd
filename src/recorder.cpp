@@ -17,15 +17,17 @@ Recorder::RECSTATUS Recorder::getStatus()
 
 bool Recorder::onProcessSamples(const sf::Int16 *samples, std::size_t sampleCount)
 {
+    bool ret = true;
     if (*samples == 0){
         if (status == RECORD){
-            if (corrector > 2){
+            if (corrector > max_blank){
                 status = END;
                 std::cout << "Saving..." << std::endl;
                 return false;
             }
-            else
+            else{
                 corrector++;
+            }
         }
     }
     else{
@@ -33,9 +35,10 @@ bool Recorder::onProcessSamples(const sf::Int16 *samples, std::size_t sampleCoun
         	std::cout << "Recording..." << std::endl;
             status = RECORD;
         }
-        if (corrector > 0)
+        if (corrector > 0){
             corrector = 0;
-        return sf::SoundBufferRecorder::onProcessSamples(samples, sampleCount);
+        }
+        ret = sf::SoundBufferRecorder::onProcessSamples(samples, sampleCount);
     }
-    return true;
+    return ret;
 }
